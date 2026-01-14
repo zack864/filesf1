@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 import streamlit as st
 @st.cache_data
@@ -70,3 +69,4 @@ if button:
         else:
 
             st.error('Low')
+
