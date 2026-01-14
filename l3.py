@@ -8,11 +8,11 @@ def predictor():
         df = pd.read_csv(url)
         df.columns = df.columns.str.strip()
 
-       if 'Product Category' in df.columns:
+        if 'Product Category' in df.columns:
              df.rename(columns={'Product Category': 'ProductCategory'}, inplace=True)
              df_encoded = pd.get_dummies(df, columns=['ProductCategory'], drop_first=True)
              target_col = 'PurchaseStatus'
-       if 'PurchaseStatus' not in df_encoded.columns:
+        if 'PurchaseStatus' not in df_encoded.columns:
                 if 'Purchase Status' in df_encoded.columns:
                     target_col = 'Purchase Status'
                 elif 'Purchase_Status' in df_encoded.columns:
@@ -79,6 +79,7 @@ if button:
         else:
 
             st.error('Low')
+
 
 
 
