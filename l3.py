@@ -5,7 +5,8 @@ from sklearn.ensemble import RandomForestClassifier
 import streamlit as st
 @st.cache_data
 def predictor():
-        df = pd.read_csv('customer_purchase_data.csv')
+        url='https://raw.githubusercontent.com/zack864/filesf1/refs/heads/main/Mall_Customers_Enhanced.csv'
+        df = pd.read_csv(url)
         df_1 = pd.get_dummies(df, columns=['ProductCategory'], drop_first=True)
         X = df_1.drop('PurchaseStatus', axis=1)
         y = df_1['PurchaseStatus']
@@ -67,4 +68,5 @@ if button:
         if prediction[0]==1:
             st.success('High')
         else:
+
             st.error('Low')
