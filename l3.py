@@ -6,7 +6,7 @@ import streamlit as st
 def predictor():
         url='https://raw.githubusercontent.com/zack864/filesf1/refs/heads/main/Mall_Customers_Enhanced.csv'
         df = pd.read_csv(url)
-       df.columns = df.columns.str.strip()
+        df.columns = df.columns.str.strip()
 
        if 'Product Category' in df.columns:
              df.rename(columns={'Product Category': 'ProductCategory'}, inplace=True)
@@ -79,6 +79,7 @@ if button:
         else:
 
             st.error('Low')
+
 
 
 
