@@ -1,25 +1,15 @@
 import pandas as pd
 import numpy as np
+from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 import streamlit as st
 @st.cache_data
 def predictor():
-        url='https://raw.githubusercontent.com/zack864/filesf1/refs/heads/main/Mall_Customers_Enhanced.csv'
-        df = pd.read_csv(url)
-        df.columns = df.columns.str.strip()
-
-        if 'Product Category' in df.columns:
-             df.rename(columns={'Product Category': 'ProductCategory'}, inplace=True)
-             df_encoded = pd.get_dummies(df, columns=['ProductCategory'], drop_first=True)
-             target_col = 'PurchaseStatus'
-        if 'PurchaseStatus' not in df_encoded.columns:
-                if 'Purchase Status' in df_encoded.columns:
-                    target_col = 'Purchase Status'
-                elif 'Purchase_Status' in df_encoded.columns:
-                    target_col = 'Purchase_Status'
-                    
-        X = df_encoded.drop(target_col, axis=1)
-        y = df_encoded[target_col]
+        df = pd.read_csv('customer_purchase_data.csv')
+        df_1 = pd.get_dummies(df, columns=['ProductCategory'], drop_first=True)
+        X = df_1.drop('PurchaseStatus', axis=1)
+        y = df_1['PurchaseStatus']
+        from sklearn.model_selection import train_test_split
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         sc = StandardScaler()
         model = RandomForestClassifier()
@@ -77,10 +67,4 @@ if button:
         if prediction[0]==1:
             st.success('High')
         else:
-
             st.error('Low')
-
-
-
-
-
